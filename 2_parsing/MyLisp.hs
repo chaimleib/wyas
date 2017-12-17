@@ -1,9 +1,11 @@
+module MyLisp where
+
 import Text.ParserCombinators.Parsec hiding (spaces)
-import System.Environment
 import Control.Monad
 
 symbol :: Parser Char
 symbol = oneOf "!#$%&|*+-/:<=>?@^_~"
+
 readExpr :: String -> String
 readExpr input = case parse (spaces >> symbol) "lisp" input of
   Left err -> "No match: " ++ show err
@@ -38,9 +40,4 @@ parseAtom = do
 
 parseNumber :: Parser LispVal
 parseNumber = liftM (Number . read) $ many1 digit
-
-main :: IO ()
-main = do
-  (expr:_) <- getArgs
-  putStrLn (readExpr expr)
 
