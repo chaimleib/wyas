@@ -2,3 +2,8 @@
 *.swp
 build/
 
+*.hi
+*.o
+ex*
+!ex*.hs
+hello
